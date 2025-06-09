@@ -22,7 +22,7 @@ A Python application for connecting to SharePoint Server 2019 using REST API wit
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/sicedia/nintex-connect-api
 cd nintex-connect-api
 ```
 
@@ -41,10 +41,10 @@ SP_PASSWORD=your-password
 ## Dependencies
 
 ```
-pandas>=1.5.0
-requests>=2.28.0
-python-dotenv>=0.19.0
-requests-ntlm>=1.1.0
+pandas==2.3.0
+python-dotenv==1.1.0
+Requests==2.32.4
+requests_ntlm==1.3.0
 ```
 
 ## Usage
@@ -96,7 +96,7 @@ all_items.to_csv("output.csv", index=False)
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `SP_SITE_URL` | SharePoint site URL | `https://sgi.cedia.org.ec` |
-| `SP_USERNAME` | SharePoint username | `nintexinstall` |
+| `SP_USERNAME` | SharePoint username | `username` |
 | `SP_PASSWORD` | SharePoint password | (empty) |
 
 ### Application Constants
@@ -140,13 +140,19 @@ The application generates:
 
 Example console output:
 ```
-2025-06-09 10:30:15 | INFO     | root | Requesting URL: https://...
-Retrieved 150 records.
-   ID  Title           Created              Modified
-0   1  Travel Request  2025-01-15T09:00:00  2025-01-15T09:00:00
-1   2  Travel Request  2025-01-16T10:30:00  2025-01-16T10:30:00
-...
-2025-06-09 10:30:16 | INFO     | root | Data saved to all_items.csv
+2025-06-09 15:14:38,531 | INFO     | root | Requesting URL: https://sgi.cedia.org.ec/_api/web/lists/GetByTitle('RA4-1%20Solicitud%20para%20Viajes')/items
+2025-06-09 15:14:38,897 | INFO     | root | Requesting URL: https://sgi.cedia.org.ec/_api/web/lists/GetByTitle('RA4-1%20Solicitud%20para%20Viajes')/items?%24skiptoken=Paged%3dTRUE%26p_ID%3d127
+2025-06-09 15:14:43,775 | INFO     | root | Requesting URL: https://sgi.cedia.org.ec/_api/web/lists/GetByTitle('RA4-1%20Solicitud%20para%20Viajes')/items?%24skiptoken=Paged%3dTRUE%26p_ID%3d2667
+Retrieved 2639 records.
+   FileSystemObjectType  Id ServerRedirectedEmbedUri ServerRedirectedEmbedUrl  ... EditorId OData__UIVersionString Attachments                                  GUID
+0                     0  28                     None                           ...        1                    9.0       False  340e50f7-a96d-4733-91d9-48a2f54884fc
+1                     0  29                     None                           ...        1                    9.0       False  f931a49d-8914-41d4-88d3-38cefbc705f5
+2                     0  30                     None                           ...        1                    8.0       False  3717017c-f4cd-4f6e-b7cf-0d24c86a8fe0
+3                     0  31                     None                           ...        1                   21.0       False  471b4fcc-c56c-4d2e-9c49-63384d40f326
+4                     0  32                     None                           ...        1                   23.0       False  ffb78b40-cb1f-4882-b198-94425545b570
+
+[5 rows x 107 columns]
+2025-06-09 15:14:44,379 | INFO     | root | Data saved to all_items.csv
 ```
 
 ## Error Handling
@@ -178,7 +184,6 @@ Log levels used:
 - **API**: SharePoint REST API with OData support
 - **Python**: Python 3.8+
 
-## Troubleshooting
 
 ### Common Issues
 
@@ -217,9 +222,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues and questions:
-1. Check the troubleshooting section
-2. Review the logs for error details
-3. Open an issue in the repository with:
+1. Review the logs for error details
+2. Open an issue in the repository with:
    - Error messages
    - Environment details
    - Steps to reproduce
