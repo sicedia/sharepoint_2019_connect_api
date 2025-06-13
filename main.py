@@ -307,7 +307,7 @@ def create_config() -> SharePointConfig:
         list_title=LIST_TITLE,
     )
 
-def save_to_csv(dataframe: pd.DataFrame, filename: str = "all_items.csv") -> None:
+def save_to_csv(dataframe: pd.DataFrame, list_title: str, filename: str = None) -> None:
     """
     Save the DataFrame to a CSV file.
 
@@ -315,9 +315,17 @@ def save_to_csv(dataframe: pd.DataFrame, filename: str = "all_items.csv") -> Non
     ----------
     dataframe : pd.DataFrame
         The DataFrame to save.
+    list_title : str
+        The SharePoint list title to use as filename base.
     filename : str, optional
-        The output filename. Default is "all_items.csv".
+        The output filename. If None, uses the list title as base name.
     """
+    if filename is None:
+        # Clean the list title to make it filesystem-safe
+        safe_title = "".join(c for c in list_title if c.isalnum() or c in (' ', '-', '_')).rstrip()
+        safe_title = safe_title.replace(' ', '_')
+        filename = f"{safe_title}.csv"
+    
     dataframe.to_csv(filename, index=False)
     logging.info("Data saved to %s", filename)
 
@@ -345,7 +353,7 @@ def main() -> None:
     df_all = sp_connector.get_all_items()
     
     display_results(df_all)
-    save_to_csv(df_all)
+    save_to_csv(df_all, config.list_title)
 
 
 if __name__ == "__main__":
