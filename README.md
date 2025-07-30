@@ -1,4 +1,4 @@
-# Nintex Connect API - SharePoint Connector
+# Connect API - SharePoint 2019 Connector
 
 A Python application for connecting to SharePoint Server 2019 using REST API with NTLM authentication to retrieve list items and export them to CSV format.
 
