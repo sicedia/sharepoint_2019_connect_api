@@ -30,7 +30,7 @@ REQUEST_HEADERS = {
 }
 
 # Environment variables
-USERNAME = os.getenv("SP_USERNAME", "nintexinstall")
+USERNAME = os.getenv("SP_USERNAME", "superuser")
 PASSWORD = os.getenv("SP_PASSWORD", "")
 SITE_URL = os.getenv("SP_SITE_URL", "https://sgi.cedia.org.ec")
 
