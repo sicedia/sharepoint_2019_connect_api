@@ -95,7 +95,7 @@ all_items.to_csv("output.csv", index=False)
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `SP_SITE_URL` | SharePoint site URL | `https://sgi.cedia.org.ec` |
+| `SP_SITE_URL` | SharePoint site URL | `https://your.domain.org.ec` |
 | `SP_USERNAME` | SharePoint username | `username` |
 | `SP_PASSWORD` | SharePoint password | (empty) |
 
